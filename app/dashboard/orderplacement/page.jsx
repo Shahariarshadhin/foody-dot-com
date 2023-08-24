@@ -1,7 +1,9 @@
 "use client";
+import { Button, Modal } from "@mui/material";
 import Image from "next/image";
 import { enqueueSnackbar } from "notistack";
 import { useEffect, useState } from "react";
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const OrderPlacement = () => {
   const [foodData, setFoodData] = useState([]);
@@ -10,6 +12,7 @@ const OrderPlacement = () => {
   const [ordertrackinginfo, setOrdertrackinginfo] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -129,6 +132,7 @@ const OrderPlacement = () => {
         enqueueSnackbar("Order placed successfully!", {
           variant: "success",
         });
+        setIsModalOpen(true);
         // You can also reset the order summary or perform any other actions here.
       } else {
         console.error("Error placing order:", response.statusText);
@@ -261,6 +265,41 @@ const OrderPlacement = () => {
                 >
                   Cancel Order
                 </button>
+              </div>
+              {/* Modal */}
+              <div className=" ">
+                <Modal
+                  className="flex justify-center "
+                  open={isModalOpen}
+                  onClose={() => setIsModalOpen(false)}
+                  aria-labelledby="order-modal-title"
+                  aria-describedby="order-modal-description"
+                >
+                  <div className="modal-content bg-[#edf3f3] flex justify-center mt-[50px] py-10 w-96 h-fit rounded-lg">
+                    <div>
+                      <div className="flex justify-between">
+                        <h2
+                          className="py-2 text-2xl font-medium"
+                          id="order-modal-title"
+                        >
+                          Order Summary
+                        </h2>
+                        <Button onClick={() => setIsModalOpen(false)}>
+                          <CancelIcon className=" text-red-600"/>
+                        </Button>
+                      </div>
+                      {/* Display order data here */}
+                      <ul>
+                        {orderSummary.map((item) => (
+                          <li key={item.id}>
+                            {item.name} - Quantity: {item.quantity} - Total: $
+                            {item.price * item.quantity}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </Modal>
               </div>
             </div>
           </div>
