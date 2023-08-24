@@ -8,6 +8,7 @@ import { LoadingButton } from "@mui/lab";
 
 import axios from "axios";
 import { enqueueSnackbar } from "notistack";
+import { OrderValidation } from "@/app/lib/validation/fooduploadvalidation";
 
 const AddFood = () => {
   const {
@@ -28,7 +29,7 @@ const AddFood = () => {
       description: "",
     },
 
-    // validationSchema: ProductValidation,
+    validationSchema: OrderValidation,
     onSubmit: async (data) => {
       try {
         const response = await axios.post(

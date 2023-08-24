@@ -8,18 +8,10 @@ import { MenuData } from "../DashboardAsidebar/page";
 
 const DashboardTopNav = () => {
   return (
-    <div className="sticky top-0 bg-slate-400 ">
-      <div className="flex justify-center py-5 space-x-5">
-        <Link href="#">
-          Home
-        </Link>
-        <Link href="#">
-          About
-        </Link>
-        <Link href="#">
-          Contact
-        </Link>
-        <div className="pl-16">
+    <div className="sticky top-0 ">
+      <div className="flex justify-end bg-[#edf3f3] lg:bg-white py-5 space-x-5">
+       
+        <div className="">
         <MobileDashboardDrawer/>
         </div>
       </div>

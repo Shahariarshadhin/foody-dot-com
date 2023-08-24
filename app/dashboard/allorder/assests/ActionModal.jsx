@@ -40,15 +40,12 @@ export default function ActionModal({ instance }) {
           },
         }}
       >
-        <div className="p-6 ">       
+        <div className="p-3 flex justify-center">       
           <div className="flex items-center cursor-pointer" >
             <DriveFileRenameOutlineIcon className="text-[#569cdd]" />
             <EditOrderModal instance={instance} />
           </div>
-          <div className="flex items-center">
-            <DeleteForeverIcon />
-            {/* <DeleteProduct instance={instance} /> */}
-          </div>
+        
         </div>
       </Menu>
     </div>

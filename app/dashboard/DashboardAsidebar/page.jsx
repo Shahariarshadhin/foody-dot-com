@@ -50,8 +50,8 @@ export const MenuData = () => {
 
 const DashboardAsidebar = () => {
   return (
-    <aside className="fixed top-0 left-0 z-40 w-62 h-screen pt-16 transition-transform -translate-x-full bg-slate-400 border-r border-gray-200 md:translate-x-0 ">
-      <div className="h-full px-3 pb-4 overflow-y-auto bg-[#F3F3F6] ">
+    <aside className="fixed top-0 left-0 z-40 w-62 h-screen pt-4 transition-transform -translate-x-full bg-[#F3F3F6]   md:translate-x-0 ">
+      <div className="h-full px-3 pb-4 overflow-y-auto  ">
         <ul className="space-y-2 ">
           
           <MenuData />

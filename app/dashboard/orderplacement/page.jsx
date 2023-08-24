@@ -113,8 +113,6 @@ const OrderPlacement = () => {
       ordertrackinginfo: ordertrackinginfo,
     };
 
-    
-
     try {
       const response = await fetch(
         "https://64e360ccbac46e480e78b1c3.mockapi.io/api/food-management-systems/food-order",
@@ -155,8 +153,8 @@ const OrderPlacement = () => {
       <div className="flex flex-col lg:flex-row gap-10 ">
         <div className="grid grid-cols-1  xl:grid-cols-2  2xl:grid-cols-3 gap-10 ">
           {isLoading ? (
-          <p>Loading...</p>
-        ) : (
+            <p>Loading...</p>
+          ) : (
             filteredFoodData.map((item) => (
               <div key={item.id} className="rounded-xl shadow-xl ">
                 {item.image && (
@@ -207,12 +205,13 @@ const OrderPlacement = () => {
                   </div>
                 </div>
               </div>
-            )))}
+            ))
+          )}
         </div>
-        <div >
+        <div>
           <p className="text-2xl mb-3 font-semibold"> Order Summary</p>
           <div className="bg-[#F3F3F6] pt-4 px-10 w-96 py-4">
-            <div className="flex justify-between pb-6 items-center border-b-2 border-3">
+            <div className="flex justify-between pb-6 items-center border-b-2 border-3 text-lg font-semibold">
               <p>Item name</p>
               <p>Quantity</p>
               <p>Price</p>
@@ -234,30 +233,34 @@ const OrderPlacement = () => {
               </div>
 
               <div className="my-4">
-                <input
-                  type="text"
-                  placeholder="Order Tracking"
-                  onChange={(e) => setOrdertrackinginfo(e.target.value)}
-                  value={ordertrackinginfo}
-                  className="px-2 py-3 rounded-md border"
-                />
-              </div>
-              <div className="flex justify-between my-4">
-                <button
-                  onClick={handlePlaceOrder}
-                  className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md"
-                >
-                  Place Order
-                </button>
-              
-                  <button
-                  
-                    onClick={handleCancelOrder}// Add this line
-                    className="mt-4 px-4 py-2 bg-red-500 text-white rounded-md"
+                <div className="my-4">
+                  <select
+                    id="orderTracking"
+                    onChange={(e) => setOrdertrackinginfo(e.target.value)}
+                    value={ordertrackinginfo}
+                    className="px-2 py-3 rounded-md border"
                   >
-                    Cancel Order
+                    <option value="">Select Order Tracking</option>
+                    <option value="Confirmed">Confirmed</option>
+                  </select>
+                </div>
+              </div>
+              <div className="flex justify-between my-6">
+                {orderSummary.length > 0 && (
+                  <button
+                    onClick={handlePlaceOrder}
+                    className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md"
+                  >
+                    Place Order
                   </button>
-              
+                )}
+
+                <button
+                  onClick={handleCancelOrder}
+                  className="mt-4 px-4 py-2 bg-red-500 text-white rounded-md"
+                >
+                  Cancel Order
+                </button>
               </div>
             </div>
           </div>

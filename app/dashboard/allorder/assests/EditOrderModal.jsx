@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import SendIcon from "@mui/icons-material/Send";
 import { LoadingButton } from "@mui/lab";
@@ -7,6 +7,11 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  MenuItem,
+  Select,
   TextField,
 } from "@mui/material";
 import axios from "axios";
@@ -58,26 +63,26 @@ const EditOrderModal = ({ instance }) => {
     },
 
     onSubmit: async (data) => {
-        try {
-          setUpdating(true); // Start update
-          await updateOrderTrackingInfo(instance.id, data.ordertrackinginfo);
-      
-          enqueueSnackbar("Updated successfully", {
-            variant: "success",
-          });
-      
-          // Close dialog and update local state
-          handleClose();
-          instance.ordertrackinginfo = data.ordertrackinginfo; // Update local state
-        } catch (error) {
-          console.log(error);
-          enqueueSnackbar("Something went wrong!", {
-            variant: "error",
-          });
-        } finally {
-          setUpdating(false); // End update
-        }
-      },
+      try {
+        setUpdating(true); // Start update
+        await updateOrderTrackingInfo(instance.id, data.ordertrackinginfo);
+
+        enqueueSnackbar("Updated successfully", {
+          variant: "success",
+        });
+
+        // Close dialog and update local state
+        handleClose();
+        instance.ordertrackinginfo = data.ordertrackinginfo; // Update local state
+      } catch (error) {
+        console.log(error);
+        enqueueSnackbar("Something went wrong!", {
+          variant: "error",
+        });
+      } finally {
+        setUpdating(false); // End update
+      }
+    },
   });
 
   return (
@@ -103,23 +108,32 @@ const EditOrderModal = ({ instance }) => {
               <form onSubmit={handleSubmit} noValidate autoComplete="off">
                 <div>
                   <div className="w-full">
-                    <TextField
+                    <FormControl
                       fullWidth
                       required
                       size="small"
-                      value={values.ordertrackinginfo}
                       error={
                         touched.ordertrackinginfo &&
                         Boolean(errors.ordertrackinginfo)
                       }
-                      helperText={
-                        touched.ordertrackinginfo && errors.ordertrackinginfo
-                      }
-                      className="w-full lg:mt-4"
-                      name="ordertrackinginfo"
-                      onChange={handleChange}
-                      label="Order Status"
-                    />
+                    >
+                    
+                      <Select
+                        className="w-full lg:mt-4"
+                        name="ordertrackinginfo"
+                        value={values.ordertrackinginfo}
+                        onChange={handleChange}
+                      >
+                        <MenuItem value="Preparing">Preparing</MenuItem>
+                        <MenuItem value="Delivered">Delivered</MenuItem>
+                      </Select>
+                      {touched.ordertrackinginfo &&
+                        errors.ordertrackinginfo && (
+                          <FormHelperText>
+                            {errors.ordertrackinginfo}
+                          </FormHelperText>
+                        )}
+                    </FormControl>
                   </div>
 
                   <div className="flex  mt-[20px] ">
